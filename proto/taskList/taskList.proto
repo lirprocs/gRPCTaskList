@@ -3,7 +3,7 @@ package taskList.v1;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/youruser/yourproject/pb/tasklist/v1;tasklistpb";
+option go_package = "github.com/lirprocs/gRPCTaskList/pb/tasklist/v1;tasklistpb";
 
 service UserService {
   rpc AddUser(AddUserRequest) returns (AddUserResponse) {}

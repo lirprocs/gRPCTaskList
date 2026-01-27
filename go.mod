@@ -1,1 +1,1 @@
-module gRPCTaskList
+module github.com/lirprocs/gRPCTaskList
