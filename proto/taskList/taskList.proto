@@ -1,0 +1,98 @@
+syntax = "proto3";
+package taskList.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/youruser/yourproject/pb/tasklist/v1;tasklistpb";
+
+service UserService {
+  rpc AddUser(AddUserRequest) returns (AddUserResponse) {}
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+  rpc ChangeUser(ChangeUserRequest) returns (ChangeUserResponse) {}
+}
+
+service TaskService {
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) {}
+  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse) {}
+  rpc ChangeTask(ChangeTaskRequest) returns (ChangeTaskResponse) {}
+  rpc AssignTask(AssignTaskRequest) returns (AssignTaskResponse) {}
+  rpc CloseTask(CloseTaskRequest) returns (CloseTaskResponse) {}
+ }
+
+message AddUserRequest {
+  string user_id = 1;
+  string username = 2;
+}
+message AddUserResponse {
+  User user = 1;
+}
+message GetUserRequest {
+  string user_id = 1;
+}
+message GetUserResponse {
+  User user = 1;
+}
+message ChangeUserRequest {
+  string user_id = 1;
+}
+message ChangeUserResponse {
+  User user = 1;
+}
+message User {
+  string user_id = 1;
+  int64 tg_id = 2;
+  string username = 3;
+  string role = 4;
+}
+
+
+message CreateTaskRequest {
+  string user_id = 1;
+  string task = 2;
+  google.protobuf.Timestamp due_at = 3;
+}
+message CreateTaskResponse {
+  Task task = 1;
+}
+message GetTasksRequest {
+  string user_id = 1;
+}
+message GetTasksResponse {
+  repeated Task tasks = 1;
+}
+message ChangeTaskRequest {
+  string task_id = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp due_at = 3;
+}
+message ChangeTaskResponse {
+  Task task = 1;
+}
+message AssignTaskRequest {
+  string task_id = 1;
+  string user_id = 2;
+}
+message AssignTaskResponse {
+  Task task = 1;
+}
+message CloseTaskRequest {
+  string task_id = 1;
+  string user_id = 2;
+}
+message CloseTaskResponse {
+  Task task = 1;
+}
+message Task {
+  string task_id = 1;
+  string user_id = 2;
+  string task = 3;
+  TaskStatus status = 4;
+  google.protobuf.Timestamp due_at = 5;
+}
+
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0;
+  TASK_STATUS_OPEN = 1;
+  TASK_STATUS_ASSIGNED = 2;
+  TASK_STATUS_CLOSED = 3;
+}
