@@ -1,5 +1,5 @@
 syntax = "proto3";
-package taskList.v1;
+package taskList.v3;
 
 import "google/protobuf/timestamp.proto";
 
@@ -9,6 +9,7 @@ service UserService {
   rpc AddUser(AddUserRequest) returns (AddUserResponse) {}
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
   rpc ChangeUser(ChangeUserRequest) returns (ChangeUserResponse) {}
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
 }
 
 service TaskService {
@@ -34,8 +35,16 @@ message GetUserResponse {
 }
 message ChangeUserRequest {
   string user_id = 1;
+  string username = 2;
+  string role = 3;
 }
 message ChangeUserResponse {
+  User user = 1;
+}
+message DeleteUserRequest {
+  string user_id = 1;
+}
+message DeleteUserResponse {
   User user = 1;
 }
 message User {
@@ -93,6 +102,6 @@ message Task {
 enum TaskStatus {
   TASK_STATUS_UNSPECIFIED = 0;
   TASK_STATUS_OPEN = 1;
-  TASK_STATUS_ASSIGNED = 2;
+  TASK_STATUS_EXPIRED = 2;
   TASK_STATUS_CLOSED = 3;
 }
