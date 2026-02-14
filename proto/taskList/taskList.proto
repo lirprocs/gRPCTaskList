@@ -79,7 +79,7 @@ message ChangeTaskResponse {
 }
 message AssignTaskRequest {
   string task_id = 1;
-  string user_id = 2;
+  string username = 2;
 }
 message AssignTaskResponse {
   Task task = 1;
